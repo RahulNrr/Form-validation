@@ -1,49 +1,55 @@
+let valid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
 let id = (id) => {
     return document.getElementById(id);
 }
 
-let classes = (classes) => document.getElementsByClassName(classes);
+let classes = (classes) => {
+    return document.getElementsByClassName(classes);
+}
 
-let username = id("username"),
+
+username = id("username"),
     email = id("email"),
     password = id("password"),
-    // errorMsg = document.getElementsByClassName("error"),
-    // succesIcon = document.getElementsByClassName("success-icon"),
-    // failureIcon = document.getElementsByClassName("failure-icon");
     form = id("form"),
     errorMsg = classes("error"),
-    succesIcon = classes("success-icon"),
+    succesIcons = classes("success-icon"),
     failureIcon = classes("failure-icon");
 
-// errorMsg = ['error', 'error', 'error'];
-
-// errorMsg[0].innerHTML = "ryryrur";
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
-    // if (username.value === '') {
-    //     errorMsg[0].innerHTML = "Username can not be blank";
-    //     failureIcon[0].style.opacity = "1";
-    //     succesIcon[0].style.opacity = "0";
-    // } else {
-    //     errorMsg[0].innerHTML = "";
-    //     failureIcon[0].style.opacity = "0";
-    //     succesIcon[0].style.opacity = "1";
-    // }
-    engine(username, 0, "Username can not be blank");
-    engine(email, 1, "Email can not be blank");
-    engine(password, 2, "Password can not be blank");
-    // errorMsg[2].innerHTML = "Here we need correct password";
-});
-// if we don't wanseriala repeat the same code, thats why we need 'engine'
-let engine = (id, serial, message) => {
-    if (id.value.trim() === "") {
-        errorMsg[serial].innerHTML = message;
-        failureIcon[serial].style.opacity = "1";
-        succesIcon[serial].style.opacity = "0";
+    if (username.value === '') {
+        errorMsg[0].innerHTML = "username can not be blank";
+        failureIcon[0].style.opacity = "1";
+        succesIcons[0].style.opacity = "0";
     } else {
-        errorMsg[serial].innerHTML = "";
-        failureIcon[serial].style.opacity = "0";
-        succesIcon[serial].style.opacity = "1";
+        errorMsg[0].innerHTML = "";
+        failureIcon[0].style.opacity = "0";
+        succesIcons[0].style.opacity = "1";
     }
-};
+    if (email.value === '') {
+        errorMsg[1].innerHTML = "email can not be blank";
+        failureIcon[1].style.opacity = "1";
+        succesIcons[1].style.opacity = "0";
+    } else {
+        errorMsg[1].innerHTML = "";
+        failureIcon[1].style.opacity = "0";
+        succesIcons[1].style.opacity = "1";
+    }
+    if (password.value === '') {
+        errorMsg[2].innerHTML = "password can not be blank";
+        failureIcon[2].style.opacity = "1";
+        succesIcons[2].style.opacity = "0";
+    } else if (password.value.match(valid)) {
+        errorMsg[2].innerHTML = "";
+        failureIcon[2].style.opacity = "0";
+        succesIcons[2].style.opacity = "1";
+    } else {
+        errorMsg[2].innerHTML = "8 to 15 characters which contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character";
+        failureIcon[2].style.opacity = "1";
+        succesIcons[2].style.opacity = "0";
+    }
+
+});
+
