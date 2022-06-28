@@ -7,7 +7,6 @@
         body {
             font-family: sans-serif;
         }
-        
         .container {
             display: flex;
             flex-direction: row;
@@ -26,6 +25,7 @@
             padding: 10px 20px;
         }
         
+        // image selection 
         .image {
             background-image: url("./images/illustration.svg");
             background-repeat: no-repeat;
